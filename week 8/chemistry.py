@@ -8,7 +8,7 @@ def main():
 
     symbol_quantity_list = parse_formula(formula, periodic_table_dict)
 
-    total_molar_mass = compute_molar_mass(
+    total_molar_mass = calculate_molar_mass(
         symbol_quantity_list, periodic_table_dict)
 
    
@@ -34,12 +34,7 @@ def main():
 
 
 def make_known_molecules_dict():
-    '''Creates and returns a dictionary that 
-    contains known chemical formulas and their names
-    Parameter:
-        none
-    Return: known_molecules_dict
-    '''
+  
     known_molecules_dict = {
         "Al2O3": "aluminum oxide",
         "CH3OH": "methanol",
@@ -64,11 +59,7 @@ def make_known_molecules_dict():
 
 
 def make_periodic_table():
-    '''Creates and returns a compound list
-    Parameter:
-        none
-    Return: periodic_table_list
-    '''
+  
     periodic_table_dict = {
        
         'Ac': ['Actinium', 227, 89],
@@ -177,18 +168,7 @@ class FormulaError(ValueError):
 
 
 def parse_formula(formula, periodic_table_dict):
-    """Convert a chemical formula for a molecule into a compound
-    list that stores the quantity of atoms of each element
-    in the molecule. For example, this function will convert
-    "H2O" to [["H", 2], ["O", 1]] and
-    "PO4H2(CH2)12CH3" to [["P", 1], ["O", 4], ["H", 29], ["C", 13]]
-    Parameters
-        formula: a string that contains a chemical formula
-        periodic_table_dict: the compound dictionary returned
-            from make_periodic_table
-    Return: a compound list that contains chemical symbols and
-        quantities like this [["Fe", 2], ["O", 3]]
-    """
+   
     assert isinstance(formula, str), \
         "wrong data type for parameter formula; " \
         f"formula is a {type(formula)} but must be a string"
@@ -274,25 +254,7 @@ SYMBOL_INDEX = 0
 QUANTITY_INDEX = 1
 
 
-def compute_molar_mass(symbol_quantity_list, periodic_table_dict):
-    """Compute and return the total molar mass of all the
-    elements listed in symbol_quantity_list.
-    Parameters
-        symbol_quantity_list is a compound list returned
-            from the parse_formula function. Each small
-            list in symbol_quantity_list has this form:
-            ["symbol", quantity].
-        periodic_table_dict is the compound dictionary
-            returned from make_periodic_table.
-    Return: the total molar mass of all the elements in
-        symbol_quantity_list.
-    For example, if symbol_quantity_list is [["H", 2], ["O", 1]],
-    this function will calculate and return
-    atomic_mass("H") * 2 + atomic_mass("O") * 1
-    1.00794 * 2 + 15.9994 * 1
-    18.01528
-    """
-   
+def calculate_molar_mass(symbol_quantity_list, periodic_table_dict):
     symbol_list = [i[0] for i in symbol_quantity_list]
     quantity_list = [i[1] for i in symbol_quantity_list]
  
@@ -312,16 +274,6 @@ def compute_molar_mass(symbol_quantity_list, periodic_table_dict):
 
 
 def get_formula_name(formula, known_molecules_dict):
-    """Try to find formula in the known_molecules_dict.
-    If formula is in the known_molecules_dict, return
-    the name of the chemical formula; otherwise return
-    "unknown compound".
-    Parameters
-        formula: a string that contains a chemical formula
-        known_molecules_dict: a dictionary that contains
-            known chemical formulas and their names
-    Return: the name of a chemical formula
-    """
    
     if formula in known_molecules_dict:
 
@@ -335,18 +287,7 @@ def get_formula_name(formula, known_molecules_dict):
 
 
 def sum_protons(symbol_quantity_list, periodic_table_dict):
-    """Compute and return the total number of protons in
-    all the elements listed in symbol_quantity_list.
-    Parameters
-        symbol_quantity_list is a compound list returned
-            from the parse_formula function. Each small
-            list in symbol_quantity_list has this form:
-            ["symbol", quantity].
-        periodic_table_dict: the compound dictionary
-            returned from make_periodic_table.
-    Return: the total number of protons of all
-        the elements in symbol_quantity_list.
-    """
+   
    
     symbol_list = [i[0] for i in symbol_quantity_list]
     quantity_list = [i[1] for i in symbol_quantity_list]
